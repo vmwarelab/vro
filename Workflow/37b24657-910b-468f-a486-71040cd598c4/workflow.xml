@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="37b24657-910b-468f-a486-71040cd598c4" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Foreach Looping]]></display-name>
+  <description><![CDATA[This workflow illustrates how to create a loop using the Foreach schema element.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="50.0" x="100.0"/>
+  <attrib name="vms" type="Array/VC:VirtualMachine" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+  </attrib>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="524.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item2" type="task" script-module="com.vmware.library.vc.vm/getAllVMs">
+    <display-name><![CDATA[getAllVMs]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.library.vc.vm").getAllVMs() ;]]></script>
+    <in-binding/>
+    <out-binding>
+      <bind name="actionResult" type="Array/VC:VirtualMachine" export-name="vms"/>
+    </out-binding>
+    <description><![CDATA[Return all the virtual machines]]></description>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item0" type="foreach">
+    <display-name><![CDATA[Foreach (Print info)]]></display-name>
+    <in-binding>
+      <bind name="vm" type="Array/VC:VirtualMachine" export-name="*vms">
+        <description><![CDATA[Virtuall machine]]></description>
+      </bind>
+    </in-binding>
+    <out-binding/>
+    <reference type="Workflow" id="1a39af35-db75-4cf8-9cc1-634cff06c959"/>
+    <position y="55.40909090909091" x="344.5"/>
+  </workflow-item>
+  <presentation/>
+</workflow>

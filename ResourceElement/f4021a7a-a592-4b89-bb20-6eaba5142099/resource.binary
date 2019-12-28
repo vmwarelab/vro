@@ -1,0 +1,9 @@
+#!/usr/lib/vmware/busybox/bin/busybox
+
+HOSTNAME=`uname -n`
+OS=`uname -o`
+RELEASE=`uname -r`
+BUILD=`uname -v | awk '{print $4}'`
+
+echo "$HOSTNAME"
+echo "$OS $RELEASE $BUILD"

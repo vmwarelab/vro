@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="560388c8-aa4c-4dbd-8133-1189090a0edf" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Multiple Iterators]]></display-name>
+  <description><![CDATA[This workflow illustrates how to create a loop using the Foreach schema element.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.fddf]]></description>
+  <position y="50.0" x="100.0"/>
+  <input>
+    <param name="vmNames" type="Array/string">
+      <description><![CDATA[Virtual machine name]]></description>
+    </param>
+    <param name="vmDiskSize" type="Array/number">
+      <description><![CDATA[Size of virtual disk in GB]]></description>
+    </param>
+    <param name="vmMemorySize" type="Array/number">
+      <description><![CDATA[Virtual machine's memory size in MB]]></description>
+    </param>
+  </input>
+  <output>
+    <param name="newVirtualMachine" type="Array/VC:VirtualMachine"/>
+  </output>
+  <attrib name="vmGuestOs" type="VC:VirtualMachineGuestOsIdentifier" read-only="false">
+    <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='dosGuest'&dunesName='VC:VirtualMachineGuestOsIdentifier']]></value>
+    <description><![CDATA[Guest operating system to use with the virtual machine]]></description>
+  </attrib>
+  <attrib name="vmFolder" type="VC:VmFolder" read-only="false">
+    <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='vc.vvork.info%2Cid:group-v22'&dunesName='VC:VmFolder']]></value>
+    <description><![CDATA[Virtual machine folder]]></description>
+  </attrib>
+  <attrib name="vmResourcePool" type="VC:ResourcePool" read-only="false">
+    <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='vc.vvork.info%2Cid:resgroup-27'&dunesName='VC:ResourcePool']]></value>
+    <description><![CDATA[Resource pool in which to create the virtual machine]]></description>
+  </attrib>
+  <attrib name="vmHost" type="VC:HostSystem" read-only="false">
+    <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='vc.vvork.info%2Cid:host-28'&dunesName='VC:HostSystem']]></value>
+    <description><![CDATA[Host on which to create the virtual machine]]></description>
+  </attrib>
+  <attrib name="vmNbOfCpus" type="number" read-only="false">
+    <value encoded="n"><![CDATA[1.0]]></value>
+    <description><![CDATA[Number of virtual processors]]></description>
+  </attrib>
+  <attrib name="vmNetwork" type="VC:Network" read-only="false">
+    <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='vc.vvork.info%2Cid:network-30'&dunesName='VC:Network']]></value>
+    <description><![CDATA[The network to connect to]]></description>
+  </attrib>
+  <attrib name="vmDatastore" type="VC:Datastore" read-only="false">
+    <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='vc.vvork.info%2Cid:datastore-29'&dunesName='VC:Datastore']]></value>
+    <description><![CDATA[Datastore in which to store the virtual machine files]]></description>
+  </attrib>
+  <attrib name="diskThinProvisioned" type="boolean" read-only="false">
+    <value encoded="n"><![CDATA[true]]></value>
+    <description><![CDATA[Make disk thin-provisioned?]]></description>
+  </attrib>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="384.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item0" type="foreach">
+    <display-name><![CDATA[Foreach (Create simple virtual machine)]]></display-name>
+    <in-binding>
+      <bind name="vmName" type="Array/string" export-name="*vmNames">
+        <description><![CDATA[Virtual machine name]]></description>
+      </bind>
+      <bind name="vmGuestOs" type="VC:VirtualMachineGuestOsIdentifier" export-name="vmGuestOs">
+        <description><![CDATA[Guest operating system to use with the virtual machine]]></description>
+      </bind>
+      <bind name="vmFolder" type="VC:VmFolder" export-name="vmFolder">
+        <description><![CDATA[Virtual machine folder]]></description>
+      </bind>
+      <bind name="vmResourcePool" type="VC:ResourcePool" export-name="vmResourcePool">
+        <description><![CDATA[Resource pool in which to create the virtual machine]]></description>
+      </bind>
+      <bind name="vmHost" type="VC:HostSystem" export-name="vmHost">
+        <description><![CDATA[Host on which to create the virtual machine]]></description>
+      </bind>
+      <bind name="vmDiskSize" type="Array/number" export-name="*vmDiskSize">
+        <description><![CDATA[Size of virtual disk in GB]]></description>
+      </bind>
+      <bind name="vmMemorySize" type="Array/number" export-name="*vmMemorySize">
+        <description><![CDATA[Virtual machine's memory size in MB]]></description>
+      </bind>
+      <bind name="vmNbOfCpus" type="number" export-name="vmNbOfCpus">
+        <description><![CDATA[Number of virtual processors]]></description>
+      </bind>
+      <bind name="vmNetwork" type="VC:Network" export-name="vmNetwork">
+        <description><![CDATA[The network to connect to]]></description>
+      </bind>
+      <bind name="vmDatastore" type="VC:Datastore" export-name="vmDatastore">
+        <description><![CDATA[Datastore in which to store the virtual machine files]]></description>
+      </bind>
+      <bind name="diskThinProvisioned" type="boolean" export-name="diskThinProvisioned">
+        <description><![CDATA[Make disk thin-provisioned?]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="newVM" type="Array/VC:VirtualMachine" export-name="*newVirtualMachine"/>
+    </out-binding>
+    <reference type="Workflow" id="BD808080808080808080808080808080A3C280800122528313869552e41805bb1"/>
+    <description><![CDATA[Creates a virtual machine with the most common devices and configuration options.]]></description>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <presentation>
+    <p-param name="vmNames">
+      <desc><![CDATA[Virtual machine name]]></desc>
+    </p-param>
+    <p-param name="vmDiskSize">
+      <desc><![CDATA[Size of virtual disk in GB]]></desc>
+    </p-param>
+    <p-param name="vmMemorySize">
+      <desc><![CDATA[Virtual machine's memory size in MB]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

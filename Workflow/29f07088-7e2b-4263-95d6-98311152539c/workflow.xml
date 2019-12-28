@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="29f07088-7e2b-4263-95d6-98311152539c" version="0.0.0" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Make believe employee records database]]></display-name>
+  <description><![CDATA[This workflow illustrates how to work with Properties objects in vRO.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="50.0" x="100.0"/>
+  <attrib name="employeeRecord" type="Properties" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[Employee record]]></description>
+  </attrib>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="524.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item2" type="task">
+    <display-name><![CDATA[Add employee record]]></display-name>
+    <script encoded="false"><![CDATA[var employeeRecord = new Properties();
+
+employeeRecord.firstName = "Brian";
+employeeRecord.lastName = "Watrous";
+employeeRecord.Title = "Principal Instructor";
+employeeRecord.zipCode = 95060;
+employeeRecord.annualSalary = 1234567890;
+employeeRecord.socialSecurityNumber = "None of your business";
+
+// How about storing something fancier than a string or a number?
+var hireDate = new Date(2006, 0, 1);
+employeeRecord.hireDate = hireDate;
+// Yep, you can store things fancier than strings and numbers. Woo hoo!]]></script>
+    <in-binding>
+      <bind name="employeeRecord" type="Properties" export-name="employeeRecord">
+        <description><![CDATA[Employee record]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="employeeRecord" type="Properties" export-name="employeeRecord">
+        <description><![CDATA[Employee record]]></description>
+      </bind>
+    </out-binding>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item0" type="task">
+    <display-name><![CDATA[Look up employee record]]></display-name>
+    <script encoded="false"><![CDATA[System.log("First name: " + employeeRecord.firstName);
+System.log("Last name: " + employeeRecord.lastName);
+System.log("Title: " + employeeRecord.Title);
+System.log("Zip code: " + employeeRecord.zipCode);
+System.log("Annual salary: $" + employeeRecord.annualSalary);
+System.log("SSN: " + employeeRecord.socialSecurityNumber);
+
+// How about storing something fancier than a string or a number?
+System.log("Hire date: " + employeeRecord.hireDate);]]></script>
+    <in-binding>
+      <bind name="employeeRecord" type="Properties" export-name="employeeRecord">
+        <description><![CDATA[Employee record]]></description>
+      </bind>
+    </in-binding>
+    <out-binding/>
+    <position y="55.40909090909091" x="344.5"/>
+  </workflow-item>
+  <presentation/>
+</workflow>

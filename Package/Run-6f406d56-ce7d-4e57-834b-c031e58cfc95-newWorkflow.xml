@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<package>
+<description><![CDATA[Export run 6f406d56-ce7d-4e57-834b-c031e58cfc95 for workflow 'New Workflow' at 12/28/2019, 1:34:52 PM.]]></description>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/WorkflowToken?id='6f406d56-ce7d-4e57-834b-c031e58cfc95'&dunesName='WorkflowToken']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='7be7e155-3477-4e0a-a09a-2d93c40182c9'&dunesName='Workflow']]></elm>
+</package>

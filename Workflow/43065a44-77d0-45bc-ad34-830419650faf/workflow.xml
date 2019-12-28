@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="43065a44-77d0-45bc-ad34-830419650faf" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Example Find VM By Name]]></display-name>
+  <description><![CDATA[This workflow illustrates how to find a VM by its name.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="50.0" x="100.0"/>
+  <input>
+    <param name="exactMatch" type="boolean">
+      <description><![CDATA[Exact match]]></description>
+    </param>
+    <param name="name" type="string">
+      <description><![CDATA[Name of the VM to find]]></description>
+    </param>
+  </input>
+  <attrib name="objectType" type="string" read-only="false">
+    <value encoded="n"><![CDATA[vm]]></value>
+    <description><![CDATA[Type of object to find (vm, host, etc.)]]></description>
+  </attrib>
+  <attrib name="matchingObjects" type="Array/Any" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[Matching objects]]></description>
+  </attrib>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="524.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item2" type="link" linked-workflow-id="a38494e0-ce6a-45e4-ac36-4b80281f123e">
+    <display-name><![CDATA[Find Objects By Type]]></display-name>
+    <in-binding>
+      <bind name="objectType" type="string" export-name="objectType">
+        <description><![CDATA[Type of object to find (vm, host, etc.)]]></description>
+      </bind>
+      <bind name="name" type="string" export-name="name">
+        <description><![CDATA[Name of the object to find]]></description>
+      </bind>
+      <bind name="exactMatch" type="boolean" export-name="exactMatch">
+        <description><![CDATA[Exact match]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="matchingObjects" type="Array/Any" export-name="matchingObjects">
+        <description><![CDATA[Matching objects]]></description>
+      </bind>
+    </out-binding>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item0" type="task">
+    <display-name><![CDATA[Scriptable task]]></display-name>
+    <script encoded="false"><![CDATA[for each (var vm in vms) {
+	System.log("Name: " + vm.name);
+	System.log("Num vCPUs: " + vm.config.hardware.numCPU);
+	System.log("vRAM (MB): " + vm.config.hardware.memoryMB);
+	System.log("=========================================");
+}]]></script>
+    <in-binding>
+      <bind name="vms" type="Array/Any" export-name="matchingObjects"/>
+    </in-binding>
+    <out-binding/>
+    <position y="55.40909090909091" x="344.5"/>
+  </workflow-item>
+  <presentation>
+    <p-param name="name">
+      <desc><![CDATA[Name of the object to find]]></desc>
+    </p-param>
+    <p-param name="exactMatch">
+      <desc><![CDATA[Exact match]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

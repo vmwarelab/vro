@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="387f654f-9c6e-492b-baff-e3970235949b" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Report network configuration of all VMs]]></display-name>
+  <description><![CDATA[This workflow illustrates how to produce a report of networking information (e.g. IP address, MAC address, etc.) for _all_ VMs .
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="50.0" x="100.0"/>
+  <attrib name="allVms" type="Array/VC:VirtualMachine" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+  </attrib>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="524.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item2" type="task" script-module="com.vmware.library.vc.vm/getAllVMs">
+    <display-name><![CDATA[getAllVMs]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.library.vc.vm").getAllVMs() ;]]></script>
+    <in-binding/>
+    <out-binding>
+      <bind name="actionResult" type="Array/VC:VirtualMachine" export-name="allVms"/>
+    </out-binding>
+    <description><![CDATA[Return all the virtual machines]]></description>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item0" type="link" linked-workflow-id="e83a006f-40ce-45ad-bc1a-1a24969b9b6b">
+    <display-name><![CDATA[Report network configuration of VMs]]></display-name>
+    <in-binding>
+      <bind name="vms" type="Array/VC:VirtualMachine" export-name="allVms">
+        <description><![CDATA[Array of virtual machines]]></description>
+      </bind>
+    </in-binding>
+    <out-binding/>
+    <description><![CDATA[Given an array of virtual machines, this workflow reports networking information (e.g. IP address, Mac address, etc.) for those VMs.]]></description>
+    <position y="55.40909090909091" x="344.5"/>
+  </workflow-item>
+  <presentation/>
+</workflow>

@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="b45971e8-7738-45bc-9b40-08c9516aff12" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Find vCenter, NSX, and vRA Servers]]></display-name>
+  <description><![CDATA[This workflow logs all of the vCenter servers, NSX Manager servers, and vRA servers registered with the vRO server.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="50.0" x="100.0"/>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="664.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item2" type="task">
+    <display-name><![CDATA[Find vCenter servers]]></display-name>
+    <script encoded="false"><![CDATA[var objects;
+objects = Server.findAllForType("VC:SdkConnection");
+
+System.log("=================================");
+System.log("vCenter Servers");
+System.log("=================================");
+
+var temp = new Array();
+for each (var object in objects) {
+	System.log("vCenter server name: " + object.name);
+	System.log("vCenter server displayName: " + object.displayName);
+	System.log("vCenter server version: " + object.version);
+	System.log("=================================");
+}
+
+System.log("");System.log("");]]></script>
+    <in-binding/>
+    <out-binding/>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item3" type="task">
+    <display-name><![CDATA[Find NSX servers]]></display-name>
+    <script encoded="false"><![CDATA[var objects;
+objects = Server.findAllForType("NSX:Connection");
+
+System.log("=================================");
+System.log("NSX Servers");
+System.log("=================================");
+
+var temp = new Array();
+for each (var object in objects) {
+	System.log("NSX server name: " + object.name);
+	System.log("NSX server displayName: " + object.displayName);
+	System.log("NSX server version: " + object.version);
+	System.log("=================================");
+}
+
+System.log("");System.log("");]]></script>
+    <in-binding/>
+    <out-binding/>
+    <position y="55.40909090909091" x="344.5"/>
+  </workflow-item>
+  <workflow-item name="item3" out-name="item0" type="task">
+    <display-name><![CDATA[Find vRA servers]]></display-name>
+    <script encoded="false"><![CDATA[var objects;
+objects = Server.findAllForType("vCAC:VcacHost");
+
+System.log("=================================");
+System.log("vRA Servers");
+System.log("=================================");
+
+var temp = new Array();
+for each (var object in objects) {
+	System.log("vRA server name: " + object.name);
+	System.log("vRA server displayName: " + object.displayName);
+	System.log("vRA server version: " + object.version);
+	System.log("=================================");
+}
+
+System.log("");System.log("");]]></script>
+    <in-binding/>
+    <out-binding/>
+    <position y="55.40909090909091" x="484.5"/>
+  </workflow-item>
+  <presentation/>
+</workflow>

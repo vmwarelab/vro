@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<package>
+<description><![CDATA[This package contains workflows created by Brian Watrous. Learn more about vRO at his blog, www.vvork.info (that's vee-vee-oh-arrr-kay, not double-you-oh-arrr-kay).
+
+These workflows are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='1a1894fb-bbca-47d2-ad6b-fd57514b1bcf'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='6a786ee2-89d6-4cfe-ae07-75fe0dc555b0'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='d2a0302f-166f-4cbf-9777-b56fa5f7b918'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='296bb949-c6a0-45d2-aa9e-7ce01c40d9f7'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='02e215df-870b-4196-b37b-8bab8e12a75b'&dunesName='Action'&name='getAllVMs'&category='com.vmware.library.vc.vm']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='6181a37d-ef39-486b-b21f-5d070160303b'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='33d35cb9-033e-4045-8cb5-15eb75746247'&dunesName='Action'&name='getFruits'&category='info.vvork.food']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='90c4093f-31c0-4a89-b331-9acd85ecc942'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='09df8add-6605-4edf-90f0-e42a3dd5ddab'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='59c53e54-b444-477f-8aae-d830936ffb71'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='a640aa74-19c8-47c7-ac66-1ba99dde9859'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/ConfigurationElement?id='53f12bef-6649-42cd-a52e-ff21eabf7daa'&dunesName='ConfigurationElement']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='84c886e7-dc76-4ccd-99ef-3b2c8f068380'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='27f2a1de-5a05-44e5-ada9-e58cd0a265f7'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/ResourceElement?id='5a6b04c2-abf3-46fc-aa06-7fb2652f137a'&dunesName='ResourceElement']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='b7e8ec52-62b8-4161-b4b1-b67630bb5c55'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='67891125-b28a-4a16-858d-e594c7f636ce'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='fa5858fa-33fc-4c17-b88c-345a6cf9ca58'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='a38494e0-ce6a-45e4-ac36-4b80281f123e'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='5bdd0202-678b-44f4-ad1f-f1a997100004'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='0c67c20e-0aab-4c7b-9377-0c512ad1891e'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='43065a44-77d0-45bc-ad34-830419650faf'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='3e3dcac6-3710-42b6-8d2e-5b895cfd12f9'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='b45971e8-7738-45bc-9b40-08c9516aff12'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='ee9f6a59-99f3-44dd-bbf7-1a0d3d5340e1'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='edfc9a43-8c12-4f8c-b3a5-fcded4febe48'&dunesName='Action'&name='getMemoryInMegabytesFromVm'&category='info.vvork.vc.queries']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='37b24657-910b-468f-a486-71040cd598c4'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='1a39af35-db75-4cf8-9cc1-634cff06c959'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='560388c8-aa4c-4dbd-8133-1189090a0edf'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='BD808080808080808080808080808080A3C280800122528313869552e41805bb1'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='ac69ba9e-0313-4c82-a380-c6db2b460dd4'&dunesName='Action'&name='getNetworksForHostSystem'&category='com.vmware.library.vc.network']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='9ce7eba5-03cb-4440-ab3e-17e664529a51'&dunesName='Action'&name='getDatastoreForHostAndResourcePool'&category='com.vmware.library.vc.datastore']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='60edece1-3d05-420b-8157-04dbb5bc8917'&dunesName='Action'&name='createVirtualFloppyRemoteConfigSpec'&category='com.vmware.library.vc.vm.spec.config.device']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='b1905fcb-8e22-40f4-a76e-63f3da97803e'&dunesName='Action'&name='createVirtualScsiControllerConfigSpec'&category='com.vmware.library.vc.vm.spec.config.device']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='fe87a8ec-9216-41e2-b847-bbb61a974fe2'&dunesName='Action'&name='createVirtualDiskFlatVer2ConfigSpec'&category='com.vmware.library.vc.vm.spec.config.device']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='ba09ce6c-9e20-4512-aa6a-2535be7c5282'&dunesName='Action'&name='createVirtualEthernetCardNetworkConfigSpec'&category='com.vmware.library.vc.vm.spec.config.device']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='99afccd7-9fcc-4dc2-82b7-586de690364e'&dunesName='Action'&name='vim3WaitTaskEnd'&category='com.vmware.library.vc.basic']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='cc3d16d5-45fd-4859-8d9e-4dc276fb8051'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='29f07088-7e2b-4263-95d6-98311152539c'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='7198799c-06e4-4038-967a-4ca307e7780a'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='9ac6a822-c1e1-4cd3-a2d7-85f83c9c4278'&dunesName='Action'&name='bulkStringReplace'&category='info.vvork.strings']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='387f654f-9c6e-492b-baff-e3970235949b'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='e83a006f-40ce-45ad-bc1a-1a24969b9b6b'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='4a7232f9-5a49-487c-b28b-70721a3f22f0'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='90808080808080808080808080808080D28080800120523434428525559a3425f'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/ResourceElement?id='f4021a7a-a592-4b89-bb20-6eaba5142099'&dunesName='ResourceElement']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/ResourceElement?id='91abefa6-1e1c-4eec-800b-ad270695f73c'&dunesName='ResourceElement']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/ResourceElement?id='8bea8fe4-f9d0-429e-aaa7-5d92e340d847'&dunesName='ResourceElement']]></elm>
+<used-plugin name='VC' version='6.5.0' />
+</package>

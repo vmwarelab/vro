@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="67891125-b28a-4a16-858d-e594c7f636ce" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Catcher]]></display-name>
+  <description><![CDATA[This workflow illustrates how to handle an exception.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="36.31818181818181" x="105.0"/>
+  <input>
+    <param name="throwException" type="boolean">
+      <description><![CDATA[Throw an exception?]]></description>
+    </param>
+  </input>
+  <attrib name="errorCode" type="string" read-only="false">
+    <value encoded="n"><![CDATA[]]></value>
+  </attrib>
+  <workflow-note x="320.0" y="81.81818181818181" w="300.0" h="72.72727272727272" color="a1d7a1ff">
+    <description><![CDATA[If you want the exception handler to see the exception thrown (i.e. the string in the call to throw( ) ), then you need to 1) Go to the "Exception" tab of the schema element that is _throwing_ the exception ("Thrower" in this example) and bind to a variable (the default name for which is "errorCode"), and 2) Go to the "IN" tab (or the "Visual Binding" tab) of the schema element that is _catching_ the exception ("Exception handler" in this example) and create an inward binding to the exception variable (errorCode by default).]]></description>
+  </workflow-note>
+  <workflow-note x="100.0" y="9.090909090909092" w="520.0" h="27.27272727272727" color="bca1d7ff">
+    <description><![CDATA[To create the exception handling path (i.e. the red dashed path), drop a Scriptable Task onto the schema element that could throw an exception. In this example, we dropped the Scriptable Task labeled "Exception handler" onto the schema element labeled "Thrower".]]></description>
+  </workflow-note>
+  <workflow-note x="320.0" y="163.63636363636363" w="80.0" h="20.0" color="bca1d7ff">
+    <description><![CDATA[REQUIRED]]></description>
+  </workflow-note>
+  <workflow-note x="440.0" y="163.63636363636363" w="80.0" h="20.0" color="a1d7a1ff">
+    <description><![CDATA[OPTIONAL]]></description>
+  </workflow-note>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="36.31818181818181" x="524.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item2" catch-name="item3" throw-bind-name="errorCode" type="link" linked-workflow-id="fa5858fa-33fc-4c17-b88c-345a6cf9ca58">
+    <display-name><![CDATA[Thrower]]></display-name>
+    <in-binding>
+      <bind name="throwException" type="boolean" export-name="throwException">
+        <description><![CDATA[Throw an exception?]]></description>
+      </bind>
+    </in-binding>
+    <out-binding/>
+    <description><![CDATA[This workflow illustrates how to throw exceptions]]></description>
+    <position y="46.31818181818181" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item0" type="task">
+    <display-name><![CDATA[Normal path]]></display-name>
+    <script encoded="false"><![CDATA[System.log("Normal path");]]></script>
+    <in-binding/>
+    <out-binding/>
+    <description><![CDATA[This scriptable task shows the workflow following the normal path because an exception wasn't thrown.]]></description>
+    <position y="46.31818181818181" x="344.5"/>
+  </workflow-item>
+  <workflow-item name="item3" out-name="item4" type="task">
+    <display-name><![CDATA[Exception handler]]></display-name>
+    <script encoded="false"><![CDATA[System.log("Abormal path");
+
+/*
+
+Do something to handle the exception. For instance:
+  - Fix the problem/condition that led to the thrown exception
+  - Log the problem/condition
+  - Throw an alternative (perhaps more descriptive) exception
+
+*/]]></script>
+    <in-binding>
+      <bind name="errorCode" type="string" export-name="errorCode"/>
+    </in-binding>
+    <out-binding/>
+    <description><![CDATA[This scriptable task catches and handles the exception]]></description>
+    <position y="100.86363636363636" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item4" throw-bind-name="errorCode" type="end" end-mode="0">
+    <position y="145.4090909090909" x="244.5"/>
+  </workflow-item>
+  <presentation>
+    <p-param name="throwException">
+      <desc><![CDATA[Throw an exception?]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

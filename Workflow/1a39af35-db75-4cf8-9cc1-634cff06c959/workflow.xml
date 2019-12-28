@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item2" object-name="workflow:name=generic" id="1a39af35-db75-4cf8-9cc1-634cff06c959" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Print info]]></display-name>
+  <description><![CDATA[This workflow illustrates how to report the amount of vRAM in a VM.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="109.54545454545453" x="85.0"/>
+  <input>
+    <param name="vm" type="VC:VirtualMachine">
+      <description><![CDATA[Virtual machine]]></description>
+    </param>
+  </input>
+  <attrib name="memoryMB" type="number" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[vRAM in megabytes]]></description>
+  </attrib>
+  <workflow-item name="item6" type="end" end-mode="0">
+    <position y="109.04545454545453" x="504.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item6" type="task">
+    <display-name><![CDATA[Print info]]></display-name>
+    <script encoded="false"><![CDATA[System.log("Name: " + vm.name);
+System.log("vRAM in MB: " + memoryMB);]]></script>
+    <in-binding>
+      <bind name="vm" type="VC:VirtualMachine" export-name="vm">
+        <description><![CDATA[Virtuall machine]]></description>
+      </bind>
+      <bind name="memoryMB" type="number" export-name="memoryMB"/>
+    </in-binding>
+    <out-binding/>
+    <position y="119.04545454545453" x="324.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item1" type="task" script-module="info.vvork.vc.queries/getMemoryInMegabytesFromVm">
+    <display-name><![CDATA[getMemoryInMegabytesFromVm]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("info.vvork.vc.queries").getMemoryInMegabytesFromVm(vm) ;]]></script>
+    <in-binding>
+      <bind name="vm" type="VC:VirtualMachine" export-name="vm">
+        <description><![CDATA[Virtual machine]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="actionResult" type="number" export-name="memoryMB"/>
+    </out-binding>
+    <description><![CDATA[Given a VM, this action returns the amount of vRAM (in megabytes) allocated to the VM.]]></description>
+    <position y="119.04545454545453" x="184.5"/>
+  </workflow-item>
+  <presentation>
+    <p-param name="vm">
+      <desc><![CDATA[Virtual machine]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

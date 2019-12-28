@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config-element id="53f12bef-6649-42cd-a52e-ff21eabf7daa" version="0.0.0">
+  <display-name><![CDATA[Example Configuration Element #1]]></display-name>
+  <description><![CDATA[The files in this folder are used as example of configuration elements.
+
+For a video explaining this example, go to http://tinyurl.com/vrovideos
+
+Learn more about vRO at Brian Watrous' blog, www.vvork.info (that's vee-vee-oh-arrr-kay, not double-you-oh-arrr-kay).
+
+These workflows are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <atts>
+    <att name="WEBSERVERIPADDRESS" type="string" read-only="false">
+      <value encoded="n"><![CDATA[192.168.1.1]]></value>
+      <description><![CDATA[Web server IP address]]></description>
+    </att>
+    <att name="SMTPSERVERIPADDRESS" type="string" read-only="false">
+      <value encoded="n"><![CDATA[192.168.1.2]]></value>
+      <description><![CDATA[SMTP server IP address]]></description>
+    </att>
+    <att name="SSHSERVERIPADDRESS" type="string" read-only="false">
+      <value encoded="n"><![CDATA[192.168.1.3]]></value>
+      <description><![CDATA[SSH server IP address]]></description>
+    </att>
+  </atts>
+</config-element>

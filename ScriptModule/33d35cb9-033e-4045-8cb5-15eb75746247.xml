@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="getFruits" result-type="Array/string" api-version="6.0.0" id="33d35cb9-033e-4045-8cb5-15eb75746247" version="0.0.1" allowed-operations="evf" category-name="info.vvork.food">
+  <description><![CDATA[This action returns a list of types of fruit as an array of strings.
+
+This action was created by Brian Watrous. Learn more about vRO at his blog, www.vvork.info (that's vee-vee-oh-arrr-kay, not double-you-oh-arrr-kay).
+
+These actions are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <script encoded="false"><![CDATA[var fruits = new Array();
+fruits = ["Apple", "Banana", "Cherry", "Date", "Eggplant"];
+return(fruits);]]></script>
+</dunes-script-module>

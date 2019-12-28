@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="4a7232f9-5a49-487c-b28b-70721a3f22f0" version="0.0.0" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Run a script stored in a resource element via SSH]]></display-name>
+  <description><![CDATA[This workflow illustrates how to work with resource elements in vRO.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="50.0" x="100.0"/>
+  <attrib name="myResourceElement" type="ResourceElement" read-only="false">
+    <value encoded="n"><![CDATA[dunes://service.dunes.ch/ResourceElement?id='f4021a7a-a592-4b89-bb20-6eaba5142099'&dunesName='ResourceElement']]></value>
+    <description><![CDATA[The resource element we will use to get the script]]></description>
+  </attrib>
+  <attrib name="hostNameOrIP" type="string" read-only="false">
+    <value encoded="n"><![CDATA[sa-esxi-01.vclass.local]]></value>
+    <description><![CDATA[Hostname or IP address of the SSH host]]></description>
+  </attrib>
+  <attrib name="port" type="number" read-only="false">
+    <value encoded="n"><![CDATA[22.0]]></value>
+    <description><![CDATA[Target port]]></description>
+  </attrib>
+  <attrib name="username" type="string" read-only="false">
+    <value encoded="n"><![CDATA[root]]></value>
+    <description><![CDATA[Username]]></description>
+  </attrib>
+  <attrib name="password" type="SecureString" read-only="false">
+    <value encoded="n"><![CDATA[8BM56W4DU77G61M72X65H31Y21W2A74992PB0616C9H51E87F3Y6BD0CEAL67AFB55M8300A0AX426A806R78E0F20J481980DHB7339F1SAC42857LF61C4DX1D83554SF3141DDNE732A4DXC4B9CDH38FEAA9OAB8D83K317C06BQE61ACJ188EF1EMA0B12DDMC6C3E79N78CF309H]]></value>
+    <description><![CDATA[Password]]></description>
+  </attrib>
+  <attrib name="cmd" type="string" read-only="false">
+    <value encoded="n"><![CDATA[]]></value>
+    <description><![CDATA[The SSH command to run]]></description>
+  </attrib>
+  <attrib name="passwordAuthentication" type="boolean" read-only="false">
+    <value encoded="n"><![CDATA[true]]></value>
+    <description><![CDATA[Sets authentication to password or key file]]></description>
+  </attrib>
+  <attrib name="result" type="number" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[0 = OK, Negative = Error, Positive = Number of values returned, after error text]]></description>
+  </attrib>
+  <attrib name="errorText" type="string" read-only="false">
+    <value encoded="n"><![CDATA[]]></value>
+    <description><![CDATA[Error text, if any]]></description>
+  </attrib>
+  <attrib name="outputText" type="string" read-only="false">
+    <value encoded="n"><![CDATA[]]></value>
+    <description><![CDATA[Result of running the SSH command]]></description>
+  </attrib>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="524.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item2" type="task">
+    <display-name><![CDATA[Import script]]></display-name>
+    <script encoded="false"><![CDATA[cmd = myResourceElement.getContentAsMimeAttachment().content;
+System.log(cmd);]]></script>
+    <in-binding>
+      <bind name="myResourceElement" type="ResourceElement" export-name="myResourceElement">
+        <description><![CDATA[The resource element we will use to get the script]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="cmd" type="string" export-name="cmd">
+        <description><![CDATA[The SSH command to run]]></description>
+      </bind>
+    </out-binding>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item0" type="link" linked-workflow-id="90808080808080808080808080808080D28080800120523434428525559a3425f">
+    <display-name><![CDATA[Run SSH command]]></display-name>
+    <in-binding>
+      <bind name="hostNameOrIP" type="string" export-name="hostNameOrIP">
+        <description><![CDATA[Hostname or IP address of the SSH host]]></description>
+      </bind>
+      <bind name="port" type="number" export-name="port">
+        <description><![CDATA[Target port]]></description>
+      </bind>
+      <bind name="username" type="string" export-name="username">
+        <description><![CDATA[Username]]></description>
+      </bind>
+      <bind name="password" type="SecureString" export-name="password">
+        <description><![CDATA[Password]]></description>
+      </bind>
+      <bind name="cmd" type="string" export-name="cmd">
+        <description><![CDATA[The SSH command to run]]></description>
+      </bind>
+      <bind name="passwordAuthentication" type="boolean" export-name="passwordAuthentication">
+        <description><![CDATA[Sets authentication to password or key file]]></description>
+      </bind>
+      <bind name="path" type="Path" explicitly-not-bound="true">
+        <description><![CDATA[Path to the private key]]></description>
+      </bind>
+      <bind name="passphrase" type="SecureString" explicitly-not-bound="true">
+        <description><![CDATA[Private key pass-phrase]]></description>
+      </bind>
+      <bind name="encoding" type="string" explicitly-not-bound="true">
+        <description><![CDATA[The encoding to be used. Leave this field empty to use the default system encoding. (Example values: "UTF-8", "ISO-8859-1"...)]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="result" type="number" export-name="result">
+        <description><![CDATA[0 = OK, Negative = Error, Positive = Number of values returned, after error text]]></description>
+      </bind>
+      <bind name="errorText" type="string" export-name="errorText">
+        <description><![CDATA[Error text, if any]]></description>
+      </bind>
+      <bind name="outputText" type="string" export-name="outputText">
+        <description><![CDATA[Result of running the SSH command]]></description>
+      </bind>
+    </out-binding>
+    <description><![CDATA[Runs an SSH command.]]></description>
+    <position y="55.40909090909091" x="344.5"/>
+  </workflow-item>
+  <presentation/>
+</workflow>

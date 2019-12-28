@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item3" object-name="workflow:name=generic" id="7198799c-06e4-4038-967a-4ca307e7780a" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Bulk String Replace]]></display-name>
+  <description><![CDATA[This workflow illustrates how to replace multiple variables in a string with values that you specify.
+
+You describe which variables to replace and what value to replace them with using a "replacement specification". This spec is not a construct defined by Javascript or by vRO. Rather it is a construct
+that I created. See the comments in the scriptable tasks to learn about this spec.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="50.0" x="100.0"/>
+  <attrib name="replacementSpec" type="Properties" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[Properties object specifying which variables to replace and what values to replace them with]]></description>
+  </attrib>
+  <attrib name="originalString" type="string" read-only="false">
+    <value encoded="n"><![CDATA[Hello. My name is {FIRSTNAME} {LASTNAME}. I live in {STATE}. I work for {COMPANY}.]]></value>
+    <description><![CDATA[The string to be modified]]></description>
+  </attrib>
+  <attrib name="modifiedString" type="string" read-only="false">
+    <value encoded="n"><![CDATA[]]></value>
+    <description><![CDATA[The string after applying the replacements]]></description>
+  </attrib>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="684.5"/>
+  </workflow-item>
+  <workflow-item name="item3" out-name="item1" type="task">
+    <display-name><![CDATA[Create replacementSpec]]></display-name>
+    <script encoded="false"><![CDATA[/*
+The following code illustrates one way that you could populate the "replacement specification".
+Rather than hard-coding the spec (as illustrated below), in real-world applications you would 
+likely populate the spec with info that you pull from a file or a database.
+*/
+
+replacementSpec = new Properties();
+
+// .put(variable, value)
+replacementSpec.put("{COMPANY}", "VMware");
+replacementSpec.put("{STATE}", "California");
+replacementSpec.put("{FIRSTNAME}", "Brian");
+replacementSpec.put("{LASTNAME}", "Watrous");
+
+/*
+In the example code above, the variables are of the form "{VARIABLENAME}". That is, the variable
+names are capitalized and are enclosed within curly braces.
+
+The variable names do not have to be capitalized. In this example they are capitalized to make the
+variables stand out (especially in string being modified). The string matching is done with a regex
+(regular expression) set for case insensitive searching, so it doesn't matter whether the variable
+names are capitalized.
+
+The variable names do not have to be enclosed within curly braces. This example uses curly braces to
+make the variables stand out (especially in string being modified). You could potentially use other
+enclosing characters (e.g. [ and ]), but beware that since the action that does the replacement is
+using a regular expression, and since regular expressions assign special meaning to select characters,
+you might run into issues. For instance, you might be tempted to specify variables such as $FIRSTNAME.
+The problem in this instance is that "$" in a regex means "end of line". You could escape the "$" (e.g.
+"\$", but the escaping is likely to make the variable names "ugly" (e.g. \$FIRSTNAME).
+
+If you do experiment with using a variable name format other than "{VARIABLENAME}" and are successful,
+let me know. I'm going to stick with "{VARIABLENAME}" for the time being because it stands out, it is
+"pretty", and it works.
+*/]]></script>
+    <in-binding>
+      <bind name="replacementSpec" type="Properties" export-name="replacementSpec">
+        <description><![CDATA[Properties object specifying which variables to replace and what values to replace them with]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="replacementSpec" type="Properties" export-name="replacementSpec">
+        <description><![CDATA[Properties object specifying which variables to replace and what values to replace them with]]></description>
+      </bind>
+    </out-binding>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item0" type="task">
+    <display-name><![CDATA[Log results]]></display-name>
+    <script encoded="false"><![CDATA[System.log("Original: " + originalString);
+System.log("Modified: " + modifiedString);]]></script>
+    <in-binding>
+      <bind name="originalString" type="string" export-name="originalString">
+        <description><![CDATA[The string to be modified]]></description>
+      </bind>
+      <bind name="modifiedString" type="string" export-name="modifiedString"/>
+    </in-binding>
+    <out-binding/>
+    <position y="55.40909090909091" x="504.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item2" type="task" script-module="info.vvork.strings/bulkStringReplace">
+    <display-name><![CDATA[bulkStringReplace]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("info.vvork.strings").bulkStringReplace(theString,replacementSpec) ;]]></script>
+    <in-binding>
+      <bind name="theString" type="string" export-name="originalString">
+        <description><![CDATA[The string to be modified]]></description>
+      </bind>
+      <bind name="replacementSpec" type="Properties" export-name="replacementSpec">
+        <description><![CDATA[Properties object specifying which variables to replace and what values to replace them with]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="actionResult" type="string" export-name="modifiedString"/>
+    </out-binding>
+    <description><![CDATA[Given a string and a "replacement specification", this action modifies the string by making the replacements specified in the spec.
+
+The spec is a Properties object. For each entry in the Properties object, the key is the name of a variable in the string (e.g. "{FirstName}"), and the value specifies what to replace the variable with (e.g. "Brian").
+
+The following sample code illustrates how you can populate the spec with hard-coded info. In real-world scenarios it is more likely that you would populate the spec with info that you pull from a file or a database.
+
+        replacementSpec = new Properties();
+
+        // replacementSpec.put(variable, value)
+        replacementSpec.put("{COMPANY}", "VMware");
+        replacementSpec.put("{STATE}", "California");
+        replacementSpec.put("{FIRSTNAME}", "Brian");
+        replacementSpec.put("{LASTNAME}", "Watrous")
+
+This action was created by Brian Watrous. Learn more about vRO at his blog, www.vvork.info (that's vee-vee-oh-arrr-kay, not double-you-oh-arrr-kay).
+]]></description>
+    <position y="55.90909090909091" x="365.0"/>
+  </workflow-item>
+  <presentation/>
+</workflow>

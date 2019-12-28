@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="getMemoryInMegabytesFromVm" result-type="number" api-version="6.0.0" id="edfc9a43-8c12-4f8c-b3a5-fcded4febe48" version="0.0.1" allowed-operations="evf" category-name="info.vvork.vc.queries">
+  <description><![CDATA[Given a VM, this action returns the amount of vRAM (in megabytes) allocated to the VM.
+
+This action was created by Brian Watrous. Learn more about vRO at his blog, www.vvork.info (that's vee-vee-oh-arrr-kay, not double-you-oh-arrr-kay).
+
+These actions are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <param n="vm" t="VC:VirtualMachine"><![CDATA[Virtual machine]]></param>
+  <script encoded="false"><![CDATA[return(vm.config.hardware.memoryMB);]]></script>
+</dunes-script-module>

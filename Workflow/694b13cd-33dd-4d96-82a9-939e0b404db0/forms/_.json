@@ -1,0 +1,1 @@
+{"layout":{"pages":[{"id":"page_8vu3lpmn","sections":[{"id":"section_xjxgzkx0","fields":[{"id":"name","display":"textField","state":{"visible":true,"read-only":false}}]}],"title":"General"}]},"schema":{"name":{"id":"name","type":{"dataType":"string"},"label":"Enter You Full Name:","constraints":{"required":true}}},"options":{"externalValidations":[]},"itemId":""}

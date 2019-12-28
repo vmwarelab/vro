@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item4" object-name="workflow:name=generic" id="e83a006f-40ce-45ad-bc1a-1a24969b9b6b" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Report network configuration of VMs]]></display-name>
+  <description><![CDATA[Given an array of virtual machines, this workflow reports networking information (e.g. IP address, Mac address, etc.) for those VMs.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="50.0" x="100.0"/>
+  <input>
+    <param name="vms" type="Array/VC:VirtualMachine">
+      <description><![CDATA[Array of virtual machines]]></description>
+    </param>
+  </input>
+  <attrib name="vmsStack" type="Array/VC:VirtualMachine" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[Stack containing the VMs]]></description>
+  </attrib>
+  <attrib name="vm" type="VC:VirtualMachine" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[Variable for holding one VM each time through the loop]]></description>
+  </attrib>
+  <workflow-item name="item1" out-name="item3" type="custom-condition" alt-out-name="item2">
+    <display-name><![CDATA[Custom decision]]></display-name>
+    <script encoded="false"><![CDATA[return(vmsStack.length > 0);]]></script>
+    <in-binding>
+      <bind name="vmsStack" type="Array/VC:VirtualMachine" export-name="vmsStack"/>
+    </in-binding>
+    <position y="45.40909090909091" x="344.5"/>
+  </workflow-item>
+  <workflow-item name="item2" type="end" end-mode="0">
+    <position y="109.04545454545453" x="384.5"/>
+  </workflow-item>
+  <workflow-item name="item3" out-name="item5" type="task">
+    <display-name><![CDATA[Pop a VM off stack]]></display-name>
+    <script encoded="false"><![CDATA[vm = vmsStack.pop();]]></script>
+    <in-binding>
+      <bind name="vmsStack" type="Array/VC:VirtualMachine" export-name="vmsStack">
+        <description><![CDATA[Stack containing the VMs]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="vmsStack" type="Array/VC:VirtualMachine" export-name="vmsStack">
+        <description><![CDATA[Stack containing the VMs]]></description>
+      </bind>
+      <bind name="vm" type="VC:VirtualMachine" export-name="vm"/>
+    </out-binding>
+    <position y="55.40909090909091" x="484.5"/>
+  </workflow-item>
+  <workflow-item name="item4" out-name="item1" type="task">
+    <display-name><![CDATA[Copy array to stack]]></display-name>
+    <script encoded="false"><![CDATA[vmsStack = vms;]]></script>
+    <in-binding>
+      <bind name="vms" type="Array/VC:VirtualMachine" export-name="vms">
+        <description><![CDATA[Array of virtual machines]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="vmsStack" type="Array/VC:VirtualMachine" export-name="vmsStack"/>
+    </out-binding>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <workflow-item name="item5" out-name="item1" type="task">
+    <display-name><![CDATA[Log network info]]></display-name>
+    <script encoded="false"><![CDATA[if (! vm.config.template) {
+	System.log("VM name: " + vm.name);
+	System.log("Primary IP address: " + vm.guest.ipAddress);
+
+	var nicCount = 0;
+	for each(nic in vm.guest.net) {
+		System.log("NIC #" + nicCount);
+		if (nic.ipAddress) {
+			System.log("    IP address: " + nic.ipAddress);
+			System.log("    MAC address: " + nic.macAddress);
+			System.log("    Network: " + nic.network);
+			System.log("    Connected: " + nic.connected);
+		} else {
+			System.log("    No IP address assigned");
+		}
+		nicCount++;
+	}
+	
+	System.log("============================");
+}]]></script>
+    <in-binding>
+      <bind name="vm" type="VC:VirtualMachine" export-name="vm">
+        <description><![CDATA[Variable for holding one VM each time through the loop]]></description>
+      </bind>
+    </in-binding>
+    <out-binding/>
+    <position y="119.04545454545453" x="484.5"/>
+  </workflow-item>
+  <presentation>
+    <p-param name="vms">
+      <desc><![CDATA[Array of virtual machines]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

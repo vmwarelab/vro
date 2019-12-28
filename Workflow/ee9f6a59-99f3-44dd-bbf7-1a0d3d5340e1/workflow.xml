@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item3" object-name="workflow:name=generic" id="ee9f6a59-99f3-44dd-bbf7-1a0d3d5340e1" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Array Looping]]></display-name>
+  <description><![CDATA[This workflow illustrates how to loop across an array.
+
+This workflow is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.]]></description>
+  <position y="109.54545454545453" x="85.0"/>
+  <attrib name="memoryMB" type="number" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[vRAM in megabytes]]></description>
+  </attrib>
+  <attrib name="vm" type="VC:VirtualMachine" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[Virtual machine]]></description>
+  </attrib>
+  <attrib name="vms" type="Array/VC:VirtualMachine" read-only="false">
+    <value encoded="n"><![CDATA[__NULL__]]></value>
+    <description><![CDATA[Array of VMs]]></description>
+  </attrib>
+  <attrib name="i" type="number" read-only="false">
+    <value encoded="n"><![CDATA[0.0]]></value>
+    <description><![CDATA[Counter variable]]></description>
+  </attrib>
+  <workflow-item name="item1" out-name="item0" type="task">
+    <display-name><![CDATA[Log info]]></display-name>
+    <script encoded="false"><![CDATA[System.log("Name: " + vm.name);
+System.log("vRAM  in MB: " + memoryMB);]]></script>
+    <in-binding>
+      <bind name="vm" type="VC:VirtualMachine" export-name="vm">
+        <description><![CDATA[Virtuall machine]]></description>
+      </bind>
+      <bind name="memoryMB" type="number" export-name="memoryMB"/>
+    </in-binding>
+    <out-binding/>
+    <position y="182.68181818181816" x="604.5"/>
+  </workflow-item>
+  <workflow-item name="item3" out-name="item5" type="task" script-module="com.vmware.library.vc.vm/getAllVMs">
+    <display-name><![CDATA[getAllVMs]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.library.vc.vm").getAllVMs() ;]]></script>
+    <in-binding/>
+    <out-binding>
+      <bind name="actionResult" type="Array/VC:VirtualMachine" export-name="vms"/>
+    </out-binding>
+    <description><![CDATA[Return all the virtual machines]]></description>
+    <position y="119.04545454545453" x="184.5"/>
+  </workflow-item>
+  <workflow-item name="item4" out-name="item2" type="task">
+    <display-name><![CDATA[Get one VM]]></display-name>
+    <script encoded="false"><![CDATA[vm = vms[i];
+
+// i = i + 1;
+
+// i++;
+]]></script>
+    <in-binding>
+      <bind name="vms" type="Array/VC:VirtualMachine" export-name="vms"/>
+      <bind name="i" type="number" export-name="i">
+        <description><![CDATA[Counter variable]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="vm" type="VC:VirtualMachine" export-name="vm">
+        <description><![CDATA[Virtuall machine]]></description>
+      </bind>
+      <bind name="i" type="number" export-name="i">
+        <description><![CDATA[Counter variable]]></description>
+      </bind>
+    </out-binding>
+    <position y="119.04545454545453" x="464.5"/>
+  </workflow-item>
+  <workflow-item name="item5" out-name="item4" type="custom-condition" alt-out-name="item6">
+    <display-name><![CDATA[More VMs?]]></display-name>
+    <script encoded="false"><![CDATA[return(i < vms.length);]]></script>
+    <in-binding>
+      <bind name="i" type="number" export-name="i"/>
+      <bind name="vms" type="Array/VC:VirtualMachine" export-name="vms"/>
+    </in-binding>
+    <position y="109.04545454545453" x="304.5"/>
+  </workflow-item>
+  <workflow-item name="item6" type="end" end-mode="0">
+    <position y="172.68181818181816" x="344.5"/>
+  </workflow-item>
+  <workflow-item name="item0" prototype-id="increase-counter" out-name="item5" content-mode="x" type="task">
+    <display-name><![CDATA[Increase counter]]></display-name>
+    <script encoded="false"><![CDATA[//Auto-generated script
+counter = counter+1;]]></script>
+    <in-binding>
+      <bind name="counter" type="number" export-name="i">
+        <description><![CDATA[counter to increment]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="counter" type="number" export-name="i">
+        <description><![CDATA[counter incremented]]></description>
+      </bind>
+    </out-binding>
+    <description><![CDATA[Increment a counter by one]]></description>
+    <position y="182.68181818181816" x="465.0"/>
+  </workflow-item>
+  <workflow-item name="item2" out-name="item1" type="task" script-module="info.vvork.vc.queries/getMemoryInMegabytesFromVm">
+    <display-name><![CDATA[getMemoryInMegabytesFromVm]]></display-name>
+    <script encoded="false"><![CDATA[//Auto generated script, cannot be modified !
+actionResult = System.getModule("info.vvork.vc.queries").getMemoryInMegabytesFromVm(vm) ;]]></script>
+    <in-binding>
+      <bind name="vm" type="VC:VirtualMachine" export-name="vm">
+        <description><![CDATA[Virtual machine]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="actionResult" type="number" export-name="memoryMB"/>
+    </out-binding>
+    <description><![CDATA[Given a VM, this action returns the amount of vRAM (in megabytes) allocated to the VM.]]></description>
+    <position y="119.54545454545453" x="605.0"/>
+  </workflow-item>
+  <presentation/>
+</workflow>

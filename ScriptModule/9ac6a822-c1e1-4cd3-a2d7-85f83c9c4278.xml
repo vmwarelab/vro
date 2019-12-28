@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="bulkStringReplace" result-type="string" api-version="6.0.0" id="9ac6a822-c1e1-4cd3-a2d7-85f83c9c4278" version="0.0.1" allowed-operations="evf" category-name="info.vvork.strings">
+  <description><![CDATA[Given a string and a "replacement specification", this action modifies the string by making the replacements specified in the spec.
+
+The spec is a Properties object. For each entry in the Properties object, the key is the name of a variable in the string (e.g. "{FirstName}"), and the value specifies what to replace the variable with (e.g. "Brian").
+
+The following sample code illustrates how you can populate the spec with hard-coded info. In real-world scenarios it is more likely that you would populate the spec with info that you pull from a file or a database.
+
+        replacementSpec = new Properties();
+
+        // replacementSpec.put(variable, value)
+        replacementSpec.put("{COMPANY}", "VMware");
+        replacementSpec.put("{STATE}", "California");
+        replacementSpec.put("{FIRSTNAME}", "Brian");
+        replacementSpec.put("{LASTNAME}", "Watrous")
+
+This action was created by Brian Watrous. Learn more about vRO at his blog, www.vvork.info (that's vee-vee-oh-arrr-kay, not double-you-oh-arrr-kay).
+]]></description>
+  <param n="theString" t="string"><![CDATA[The string to be modified]]></param>
+  <param n="replacementSpec" t="Properties"><![CDATA[Properties object specifying which variables to replace and what values to replace them with]]></param>
+  <script encoded="false"><![CDATA[/*
+The technique utilized in the code below was inspired by the example provided by Ben McCormick at
+https://stackoverflow.com/questions/15604140/replace-multiple-strings-with-multiple-other-strings
+*/
+
+var re = new RegExp(Object.keys(replacementSpec).join("|"),"gi");
+
+//System.log("re: " + re);
+//System.log("theString: " + theString);
+
+var newString = theString.replace(re, function(matched){
+  //System.log("matched: " + matched);
+  return replacementSpec[matched];	// This is _not_ the return() of the action.
+									//
+									// This _is_ the return() of the function which is conditionally
+									// determining the replacement string that is specified as the
+									// second argument to .replace().
+});
+
+return(newString);					// _This_ is the action's return().]]></script>
+</dunes-script-module>
